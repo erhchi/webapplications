@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IDestination } from './destination';
+import { Iitinerary, Itinerary } from './itinerary';
 
 @Component({
   selector: 'app-travel-request',
@@ -29,6 +30,11 @@ import { IDestination } from './destination';
       "imageUrl" : "assets/images/chicago.png"
     }
   ];
+
+  
+  model = new Itinerary(
+    "", new Date(), new Date(), "", "", 0
+  )
 
   constructor() { }
 

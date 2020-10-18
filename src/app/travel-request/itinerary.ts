@@ -9,7 +9,7 @@ export interface Iitinerary {
 }
 
 export class Itinerary implements Iitinerary{
-
+    
     constructor(
         public itineraryId : string,
         public departureDate : Date,
@@ -17,7 +17,6 @@ export class Itinerary implements Iitinerary{
         public origin : string,
         public destination : string,
         public numberOfTravelers : number){
-
         }
 
     calculateCost():number{

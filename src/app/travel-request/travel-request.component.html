@@ -41,19 +41,20 @@
         <hr/>
         <!---->
 
-        <!-- <form id="travelForm" (ngSubmit)="onSubmit(form)"> -->
-        <form id="travelForm">
+        <form #travelForm="ngForm" (ngSubmit)="onSubmit(travelForm)">
             <div class="form-group">
                 <label>Originating Airport:</label>
-                <select class="form-control">
+
+                <select class="form-control" name="origin" [(ngModel)]="model.origin">
                     <option value="">Select Origin Airport</option>
-                    <option value="MIA">Miami International</option>
-                    <option value="ORD">O'hare International</option>
+                    <option *ngFor="let destination of destinations" [value]="destination.Code">
+                        {{ destination.Name }}
+                    </option>
                 </select>
             </div>
             <div class="form-group">
                 <label>Departure Date:</label>
-                <input type="date" class="form-control">
+                <input type="date" class="form-control" name="departuredate" [(ngModel)]="model.departureDate">
             </div>
             <div class="form-group">
                 <button class="btn btn-primary btn-block">Submit</button>
