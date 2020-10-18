@@ -1,0 +1,13 @@
+.companyLogo{
+    font-family: URW Chancery L, cursive;
+}
+.courseMoniker{
+    font-size: small;
+}
+.thumbnailImg{
+    width: 15%;
+    height: 5%;
+}
+table{
+    table-layout: fixed;
+}

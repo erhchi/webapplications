@@ -1,0 +1,70 @@
+<div class="card text-center">
+    <div class="card-header display-4">
+        {{ componentTitle }}
+    </div>
+    <div class="card-body">
+        <h4 class="card-title">Destinations</h4>
+        <!-- <hr/> -->
+        <div class="table-responsive">
+            <table class="table" *ngIf="destinations && destinations.length">
+                <thead>
+                    
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Rating</th>
+                    <th></th>
+                    
+                </thead>
+                <tbody>
+                    <tr *ngFor="let destination of destinations">
+                        
+                        <td>{{ destination.Code }}</td>
+                        <td>{{ destination.Name }}</td>
+                        <td>{{ destination.Description }}</td>
+                        <td>{{ destination.Rating }}
+                            <br/><i class="fa fa-snowflake-o" aria-hidden="true"></i>
+                            <i class="fa fa-thermometer-full" aria-hidden="true"></i></td>
+                        <td>
+                            <img [src]="destination.imageUrl"
+                                 [title]="destination.Name"
+                                 class="thumbnailImg">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+    <div class="card-body">
+        <h4 class="card-title">Book Now</h4>
+        <hr/>
+        <!---->
+
+        <!-- <form id="travelForm" (ngSubmit)="onSubmit(form)"> -->
+        <form id="travelForm">
+            <div class="form-group">
+                <label>Originating Airport:</label>
+                <select class="form-control">
+                    <option value="">Select Origin Airport</option>
+                    <option value="MIA">Miami International</option>
+                    <option value="ORD">O'hare International</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Departure Date:</label>
+                <input type="date" class="form-control">
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary btn-block">Submit</button>
+            </div>
+        </form>
+        
+            <!---->
+        <div class="card-footer text-muted">
+            <div class="companyLogo">YouNoGo Travel &reg;</div> 
+            <div class="courseMoniker">Eric Haerr <br/>
+            CSC 436 Web Applications</div>
+        </div>
+    </div>
+</div>
