@@ -10,6 +10,8 @@ import { Iitinerary, Itinerary } from './itinerary';
  export class TravelRequestComponent implements OnInit {
 
   componentTitle: string = 'Travel Request';
+  min: number = 1;
+  max: number = 9;
 
   //destinations: IDestination[] = []
   destinations: IDestination[] = [
@@ -18,7 +20,7 @@ import { Iitinerary, Itinerary } from './itinerary';
       "Name": "Miami",
       "Code": "MIA",
       "Description" : "Warm all year round",
-      "Rating": 5,
+      "Rating": 4,
       "imageUrl" : "assets/images/miami.png"
     },
     {
@@ -28,10 +30,18 @@ import { Iitinerary, Itinerary } from './itinerary';
       "Description" : "Cold, cold, cold",
       "Rating": 2,
       "imageUrl" : "assets/images/chicago.png"
+    },
+    {
+      "Id" : 3,
+      "Name" : "Denver",
+      "Code" : "DIA",
+      "Description" : "Mountains and beer",
+      "Rating": 5,
+      "imageUrl" : "assets/images/denver.png"
     }
   ];
 
-  
+
   model = new Itinerary(
     "", new Date(), new Date(), "", "", 0
   )
@@ -45,6 +55,13 @@ import { Iitinerary, Itinerary } from './itinerary';
 
   onSubmit(form): void {
     console.log(form.value);
+    console.log(this.model.calculateCost());
+    //form.reset();
+  }
+
+  onCancel(form):void{
+    console.log('cancel')
+    form.reset();
   }
 
 }

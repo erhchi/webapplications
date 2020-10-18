@@ -1,67 +1,141 @@
-<div class="card text-center">
-    <div class="card-header display-4">
-        {{ componentTitle }}
-    </div>
-    <div class="card-body">
-        <h4 class="card-title">Destinations</h4>
-        <!-- <hr/> -->
-        <div class="table-responsive">
-            <table class="table" *ngIf="destinations && destinations.length">
-                <thead>
-                    
-                    <th>Code</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Rating</th>
-                    <th></th>
-                    
-                </thead>
-                <tbody>
-                    <tr *ngFor="let destination of destinations">
+<div >
+    <div class="card text-center">
+        <div class="card-header display-4">
+            {{ componentTitle }}
+        </div>
+        <div class="card-body">
+            <h4 class="card-title">Available Destinations</h4>
+            <!-- <hr/> -->
+            <div class="table-responsive">
+                <table class="table" *ngIf="destinations && destinations.length">
+                    <thead>
                         
-                        <td>{{ destination.Code }}</td>
-                        <td>{{ destination.Name }}</td>
-                        <td>{{ destination.Description }}</td>
-                        <td>{{ destination.Rating }}
-                            <br/><i class="fa fa-snowflake-o" aria-hidden="true"></i>
-                            <i class="fa fa-thermometer-full" aria-hidden="true"></i></td>
-                        <td>
-                            <img [src]="destination.imageUrl"
-                                 [title]="destination.Name"
-                                 class="thumbnailImg">
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                        <th>Code</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Rating</th>
+                        <th></th>
+                        
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let destination of destinations">
+                            
+                            <td>{{ destination.Code }}</td>
+                            <td>{{ destination.Name }}</td>
+                            <td>{{ destination.Description }}</td>
+                            <td>{{ destination.Rating }}
+                                <br/><i class="fa fa-snowflake-o" aria-hidden="true"></i>
+                                <i class="fa fa-thermometer-full" aria-hidden="true"></i></td>
+                            <td>
+                                <img [src]="destination.imageUrl"
+                                    [title]="destination.Name"
+                                    class="thumbnailImg">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
 
+            </div>
         </div>
     </div>
+    
+    <!-- <div class="card-body">
+        <div class="row">
+            <div class="col">1</div>
+            <div class="col">2</div>
+        </div>
+        <div class="row">
+            <div class="col">3</div>
+        </div>
+        <div class="row">
+            <div class="col">4</div>
+        </div>
+    </div> -->
+
     <div class="card-body">
         <h4 class="card-title">Book Now</h4>
         <hr/>
-        <!---->
-
-        <form #travelForm="ngForm" (ngSubmit)="onSubmit(travelForm)">
-            <div class="form-group">
-                <label>Originating Airport:</label>
-
-                <select class="form-control" name="origin" [(ngModel)]="model.origin">
-                    <option value="">Select Origin Airport</option>
-                    <option *ngFor="let destination of destinations" [value]="destination.Code">
-                        {{ destination.Name }}
-                    </option>
-                </select>
+        <!-- <form #travelForm="ngForm" (ngSubmit)="onSubmit(travelForm)"> -->
+        <form #travelForm="ngForm" (ngSubmit)="travelForm.form.valid && onSubmit(travelForm)">
+        <div class="form-row">
+                <div class="form-group col">
+                    <label>Origin:</label>
+                    <select class="form-control" name="origin" 
+                    [(ngModel)]="model.origin"
+                    #origin="ngModel"
+                    [ngClass]="{'is-invalid' : travelForm.submitted && origin.invalid}"
+                    required>
+                    
+                        <option value="">Select Originating Airport</option>
+                        <option *ngFor="let destination of destinations" [value]="destination.Code">
+                            {{ destination.Name }}
+                        </option>
+                    </select>
+                    <div *ngIf="travelForm.submitted && origin.invalid" class="invalid-feedback">
+                        <p *ngIf="origin.errors.required" class="text-danger">Origin is required</p>
+                    </div>
+                </div>
+                <div class="form-group col">
+                    <label>Destination:</label>
+                    <select class="form-control" name="destination" 
+                    [(ngModel)]="model.destination"
+                    #destination="ngModel"
+                    [ngClass]="{'is-invalid' : travelForm.submitted && destination.invalid}"
+                    required>
+                        <option value="">Select Destination Airport</option>
+                        <option *ngFor="let destination of destinations" [value]="destination.Code">
+                            {{ destination.Name }}
+                        </option>
+                    </select>
+                    <div *ngIf="travelForm.submitted && destination.invalid" class="invalid-feedback">
+                        <p *ngIf="destination.errors.required" class="text-danger">Destination is required</p>
+                    </div>
+                </div>
+        </div>
+        <div class="form-row ">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>Departure Date:</label>
+                    <input type="date" class="form-control" name="departuredate" 
+                    [(ngModel)]="model.departureDate"
+                    #departuredate="ngModel"
+                    [ngClass]="{'is-invalid' : travelForm.submitted && departuredate.invalid}"
+                    required>
+                    <div *ngIf="travelForm.submitted && departuredate.invalid" class="invalid-feedback">
+                        <p *ngIf="departuredate.errors.required" class="text-danger">Departure date is required</p>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label>Departure Date:</label>
-                <input type="date" class="form-control" name="departuredate" [(ngModel)]="model.departureDate">
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label>Number of Passengers:</label><br/>
+                    <!-- <input type="range" name="numbertravelers" [(ngModel)]="model.numberOfTravelers" [min]="min" [max]="max"> -->
+                    <input type="number" name="numbertravelers" [(ngModel)]="model.numberOfTravelers" [min]="min" [max]="max">
+                </div>
             </div>
-            <div class="form-group">
+        </div>
+
+        <div class="form-row " >
+            <div class="form-group col-md-8"></div>
+            <div class="form-group col ">
+                <label>Total Cost: {{ model.calculateCost() | currency: 'USD' : 'symbol' : '1.2-2' }}</label>
+            </div>
+        </div>
+        <div class="form-row ">
+            <div class="form-group col-md-8"></div>
+            <div class="form-group col-md-2">
                 <button class="btn btn-primary btn-block">Submit</button>
             </div>
+            <div class="form-group col-md-2">
+                <button type="button" class="btn btn-secondary btn-block" (click)="onCancel(travelForm)">Cancel</button>
+            </div>
+        </div>
+
         </form>
-        
-            <!---->
+    </div>
+    <div class="card-body text-center">
         <div class="card-footer text-muted">
             <div class="companyLogo">YouNoGo Travel &reg;</div> 
             <div class="courseMoniker">Eric Haerr <br/>

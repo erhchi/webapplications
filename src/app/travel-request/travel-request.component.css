@@ -11,3 +11,6 @@
 table{
     table-layout: fixed;
 }
+.border {
+    border-width:3px !important;
+}
