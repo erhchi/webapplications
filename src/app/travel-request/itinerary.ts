@@ -1,4 +1,4 @@
-export interface Iitinerary {
+export interface Itinerary {
     itineraryId : string;
     //property to refer to Customer instance
     departureDate: Date;
@@ -8,7 +8,7 @@ export interface Iitinerary {
     numberOfTravelers: number;
 }
 
-export class Itinerary implements Iitinerary{
+export class Itinerary implements Itinerary{
     
     constructor(
         public itineraryId : string,

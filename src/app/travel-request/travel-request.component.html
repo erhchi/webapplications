@@ -5,27 +5,40 @@
         </div>
         <div class="card-body">
             <h4 class="card-title">Available Destinations</h4>
-            <!-- <hr/> -->
             <div class="table-responsive">
                 <table class="table" *ngIf="destinations && destinations.length">
                     <thead>
-                        
                         <th>Code</th>
-                        <th>Name</th>
+                        <th>City</th>
                         <th>Description</th>
                         <th>Rating</th>
                         <th></th>
-                        
                     </thead>
                     <tbody>
-                        <tr *ngFor="let destination of destinations">
+                        <tr *ngFor="let destination of destinations"
+                            [ngSwitch]="destination.RatingType">
                             
-                            <td>{{ destination.Code }}</td>
-                            <td>{{ destination.Name }}</td>
+                            <td>{{ destination.AirportCode }}</td>
+                            <td>{{ destination.City }}</td>
                             <td>{{ destination.Description }}</td>
-                            <td>{{ destination.Rating }}
-                                <br/><i class="fa fa-snowflake-o" aria-hidden="true"></i>
-                                <i class="fa fa-thermometer-full" aria-hidden="true"></i></td>
+                            <!-- <td>{{ destination.Rating }} -->
+                            <td>
+                               <div *ngSwitchCase="'snowflake'">
+                                   <div *ngFor="let n of destination.RatingIcons; let i = index;">
+                                    <span class="inline-block padding-right: 10px; float-right">
+                                    <i class="fa fa-snowflake-o icon-padding" aria-hidden="true"></i>
+                                    </span>
+                                   </div>
+                               </div>                         
+                               <div *ngSwitchCase="'thermometer'">
+                                <div *ngFor="let n of destination.RatingIcons; let i = index;">
+                                    <span class="inline-block padding-right: 10px; float-right">
+                                    <i class="fa fa-thermometer-full icon-padding"  aria-hidden="true"></i>
+                                    </span>
+                                   </div>
+                                 
+                               </div>
+                            </td>
                             <td>
                                 <img [src]="destination.imageUrl"
                                     [title]="destination.Name"
@@ -56,7 +69,10 @@
         <h4 class="card-title">Book Now</h4>
         <hr/>
         <!-- <form #travelForm="ngForm" (ngSubmit)="onSubmit(travelForm)"> -->
-        <form #travelForm="ngForm" (ngSubmit)="travelForm.form.valid && onSubmit(travelForm)">
+        <form #travelForm="ngForm" (ngSubmit)="travelForm.form.valid && onSubmit(travelForm)"
+        [numberRange]="['numbertravelers']"
+        [routeValidation]="['origin','destination']"
+        >
         <div class="form-row">
                 <div class="form-group col">
                     <label>Origin:</label>
@@ -67,8 +83,8 @@
                     required>
                     
                         <option value="">Select Originating Airport</option>
-                        <option *ngFor="let destination of destinations" [value]="destination.Code">
-                            {{ destination.Name }}
+                        <option *ngFor="let destination of destinations" [value]="destination.AirportCode">
+                            {{ destination.AirportName }}
                         </option>
                     </select>
                     <div *ngIf="travelForm.submitted && origin.invalid" class="invalid-feedback">
@@ -83,12 +99,13 @@
                     [ngClass]="{'is-invalid' : travelForm.submitted && destination.invalid}"
                     required>
                         <option value="">Select Destination Airport</option>
-                        <option *ngFor="let destination of destinations" [value]="destination.Code">
-                            {{ destination.Name }}
+                        <option *ngFor="let destination of destinations" [value]="destination.AirportCode">
+                            {{ destination.AirportName }}
                         </option>
                     </select>
                     <div *ngIf="travelForm.submitted && destination.invalid" class="invalid-feedback">
-                        <p *ngIf="destination.errors.required" class="text-danger">Destination is required</p>
+                        <p *ngIf="destination.errors.required" class="text-danger">Destination is required.</p>
+                        <p *ngIf="destination.errors.routeValidation">Destination can't be the same as the origin, duh.</p>
                     </div>
                 </div>
         </div>
@@ -96,14 +113,18 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label>Departure Date:</label>
-                    <input type="date" class="form-control" name="departuredate" 
+                    
+                    <input type="date" class="form-control" name="departuredate" id="departuredate"
                     [(ngModel)]="model.departureDate"
                     #departuredate="ngModel"
                     [ngClass]="{'is-invalid' : travelForm.submitted && departuredate.invalid}"
-                    required>
+                    required
+                    >
+
                     <div *ngIf="travelForm.submitted && departuredate.invalid" class="invalid-feedback">
-                        <p *ngIf="departuredate.errors.required" class="text-danger">Departure date is required</p>
+                        <p *ngIf="departuredate.errors.required" class="text-danger">Departure date is required.</p>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -111,8 +132,16 @@
             <div class="col">
                 <div class="form-group">
                     <label>Number of Passengers:</label><br/>
-                    <!-- <input type="range" name="numbertravelers" [(ngModel)]="model.numberOfTravelers" [min]="min" [max]="max"> -->
-                    <input type="number" name="numbertravelers" [(ngModel)]="model.numberOfTravelers" [min]="min" [max]="max">
+                    <input type="number" name="numbertravelers" [min]="min" [max]="max"
+                    [(ngModel)]="model.numberOfTravelers" 
+                    #numbertravelers="ngModel"                   
+                    [ngClass]="{'is-invalid' : travelForm.submitted && numbertravelers.invalid}" 
+                    numbertravelers
+                    required>                   
+                    <div *ngIf="travelForm.submitted && numbertravelers.invalid" class="invalid-feedback">
+                        <div *ngIf="numbertravelers.errors.numberRange">This is bad, M'kay!</div>
+                        <div *ngIf="numbertravelers.errors.overRange">Please call 900-468-7883 for Group Travel.</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -129,7 +158,8 @@
                 <button class="btn btn-primary btn-block">Submit</button>
             </div>
             <div class="form-group col-md-2">
-                <button type="button" class="btn btn-secondary btn-block" (click)="onCancel(travelForm)">Cancel</button>
+                <!-- <button type="button" class="btn btn-secondary btn-block" (click)="onCancel(travelForm)">Cancel</button> -->
+                <button type="button" class="btn btn-secondary btn-block" (click)="clear()">Cancel</button>
             </div>
         </div>
 
@@ -143,3 +173,22 @@
         </div>
     </div>
 </div>
+<script>
+//     $(document).ready(function(){
+
+//     $("#departuredate").datepicker("setDate", new Date(1999,01,01));
+//     $("#departuredate").datepicker('update');
+//     $("#departuredate").val('');
+
+//     $("#departuredate").datepicker({
+//         format: "mm/dd/yyyy",
+//         todayHighlight: true,
+//         startDate: new Date(),
+//         endDate: new Date(),
+//         autoclose: true
+//     });
+//     $('#departuredate').datepicker('setDate', new Date());
+    
+// });
+
+</script>
