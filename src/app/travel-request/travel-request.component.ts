@@ -74,6 +74,19 @@ import { Itinerary } from './itinerary';
 
     console.log(form.value);
     console.log(this.model.calculateCost());
+
+    alert(
+      'Here\'s your trip: ' +
+      '\n\nLeave: ' +
+      this.model.origin + 
+      '\nArrive: ' + 
+      this.model.destination + 
+      '\nDepart on: ' +
+      this.model.departureDate.toLocaleDateString() + 
+      '\nNumber of travelers: ' + 
+      this.model.numberOfTravelers +
+      '\n\n...sorry ran out of time to build confirmation component.'
+    );
     //form.reset();
   }
 
