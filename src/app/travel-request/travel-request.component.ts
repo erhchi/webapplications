@@ -82,7 +82,8 @@ import { Itinerary } from './itinerary';
       '\nArrive: ' + 
       this.model.destination + 
       '\nDepart on: ' +
-      this.model.departureDate.toLocaleDateString() + 
+      //this.model.departureDate.toLocaleDateString() + 
+      this.model.departureDate +
       '\nNumber of travelers: ' + 
       this.model.numberOfTravelers +
       '\n\n...sorry ran out of time to build confirmation component.'

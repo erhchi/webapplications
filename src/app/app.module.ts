@@ -7,13 +7,15 @@ import { FormsModule } from '@angular/forms';
 import { TravelRequestComponent } from './travel-request/travel-request.component';
 import { NumberRangeDirective } from './directives/number-range.directive';
 import { RouteValidationDirective } from './directives/route-validation.directive';
+import { DateValidationDirective } from './directives/date-validation.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     TravelRequestComponent,
     NumberRangeDirective,
-    RouteValidationDirective
+    RouteValidationDirective,
+    DateValidationDirective
   ],
   imports: [
     BrowserModule,

@@ -72,6 +72,7 @@
         <form #travelForm="ngForm" (ngSubmit)="travelForm.form.valid && onSubmit(travelForm)"
         [numberRange]="['numbertravelers']"
         [routeValidation]="['origin','destination']"
+        [departureDateCheck]="['departuredate']"
         >
         <div class="form-row">
                 <div class="form-group col">
@@ -118,11 +119,13 @@
                     [(ngModel)]="model.departureDate"
                     #departuredate="ngModel"
                     [ngClass]="{'is-invalid' : travelForm.submitted && departuredate.invalid}"
+                    departuredate
                     required
                     >
 
                     <div *ngIf="travelForm.submitted && departuredate.invalid" class="invalid-feedback">
-                        <p *ngIf="departuredate.errors.required" class="text-danger">Departure date is required.</p>
+                        <p *ngIf="departuredate.errors.departureDateCheck" class="text-danger">Departure date must be in future.</p>
+                        <p *ngIf="departuredate.errors.departureDatePast" class="text-danger">Ok, you want to give us money for travelling in the past???</p>
                     </div>
 
                 </div>
@@ -132,6 +135,7 @@
             <div class="col">
                 <div class="form-group">
                     <label>Number of Passengers:</label><br/>
+
                     <input type="number" name="numbertravelers" [min]="min" [max]="max"
                     [(ngModel)]="model.numberOfTravelers" 
                     #numbertravelers="ngModel"                   
