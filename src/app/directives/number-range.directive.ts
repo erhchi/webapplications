@@ -24,7 +24,7 @@ export class NumberRangeDirective implements Validator {
 
       if (control.value === 0 ){
         control.setErrors({numberRange: true})
-      }else if (control.value > 9){
+      }else if (control.value > 5){
         control.setErrors({overRange: true})
       }else{
         control.setErrors(null);
