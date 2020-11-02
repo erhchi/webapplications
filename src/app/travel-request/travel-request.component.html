@@ -1,72 +1,11 @@
 <div >
-    <div class="card text-center">
-        <div class="card-header display-4">
-            {{ componentTitle }}
-        </div>
-        <div class="card-body">
-            <h4 class="card-title">Available Destinations</h4>
-            <div class="table-responsive">
-                <table class="table" *ngIf="destinations && destinations.length">
-                    <thead>
-                        <th>Code</th>
-                        <th>City</th>
-                        <th>Description</th>
-                        <th>Rating</th>
-                        <th></th>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let destination of destinations"
-                            [ngSwitch]="destination.RatingType">
-                            
-                            <td>{{ destination.AirportCode }}</td>
-                            <td>{{ destination.City }}</td>
-                            <td>{{ destination.Description }}</td>
-                            <!-- <td>{{ destination.Rating }} -->
-                            <td>
-                               <div *ngSwitchCase="'snowflake'">
-                                   <div *ngFor="let n of destination.RatingIcons; let i = index;">
-                                    <span class="inline-block padding-right: 10px; float-right">
-                                    <i class="fa fa-snowflake-o icon-padding" aria-hidden="true"></i>
-                                    </span>
-                                   </div>
-                               </div>                         
-                               <div *ngSwitchCase="'thermometer'">
-                                <div *ngFor="let n of destination.RatingIcons; let i = index;">
-                                    <span class="inline-block padding-right: 10px; float-right">
-                                    <i class="fa fa-thermometer-full icon-padding"  aria-hidden="true"></i>
-                                    </span>
-                                   </div>
-                                 
-                               </div>
-                            </td>
-                            <td>
-                                <img [src]="destination.imageUrl"
-                                    [title]="destination.Name"
-                                    class="thumbnailImg">
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
+    <div class="card-body">
+        <div class="card text-center">
+            <div class="card-header display-4">
+                {{ componentTitle }}
             </div>
         </div>
-    </div>
-    
-    <!-- <div class="card-body">
-        <div class="row">
-            <div class="col">1</div>
-            <div class="col">2</div>
-        </div>
-        <div class="row">
-            <div class="col">3</div>
-        </div>
-        <div class="row">
-            <div class="col">4</div>
-        </div>
-    </div> -->
-
-    <div class="card-body">
-        <h4 class="card-title">Book Now</h4>
+        <!-- <h4 class="card-title">Book Now</h4> -->
         <hr/>
         <!-- <form #travelForm="ngForm" (ngSubmit)="onSubmit(travelForm)"> -->
         <form #travelForm="ngForm" (ngSubmit)="travelForm.form.valid && onSubmit(travelForm)"
@@ -169,30 +108,5 @@
 
         </form>
     </div>
-    <div class="card-body text-center">
-        <div class="card-footer text-muted">
-            <div class="companyLogo">YouNoGo Travel &reg;</div> 
-            <div class="courseMoniker">Eric Haerr <br/>
-            CSC 436 Web Applications</div>
-        </div>
-    </div>
+
 </div>
-<script>
-//     $(document).ready(function(){
-
-//     $("#departuredate").datepicker("setDate", new Date(1999,01,01));
-//     $("#departuredate").datepicker('update');
-//     $("#departuredate").val('');
-
-//     $("#departuredate").datepicker({
-//         format: "mm/dd/yyyy",
-//         todayHighlight: true,
-//         startDate: new Date(),
-//         endDate: new Date(),
-//         autoclose: true
-//     });
-//     $('#departuredate').datepicker('setDate', new Date());
-    
-// });
-
-</script>

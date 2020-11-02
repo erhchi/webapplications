@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { IDestination } from './destination';
-import { Itinerary } from './itinerary';
+import { IDestination } from '../models/destination';
+import { Itinerary } from '../models/itinerary';
 //import { Router } from '@angular/router';
 
 @Component({
