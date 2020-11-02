@@ -5,19 +5,21 @@
         </div>
     </div>
     <div class="table-responsive">
-        <table class="table" *ngIf="destinations && destinations.length">
+        <table class="table" *ngIf="destinations && destinations.length" >
             <thead>
-                <th>Code</th>
-                <th>City</th>
-                <th>Description</th>
-                <th>Rating</th>
-                <th></th>
+                <tr>
+                    <th style="width:10%">Code</th>
+                    <th style="width:20%">City</th>
+                    <th style="width:35%">Description</th>
+                    <th style="width:20%; text-align: center;">Rating</th>
+                    <th style="width:15%;" ></th>
+                </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let destination of destinations"
                     [ngSwitch]="destination.RatingType">
                     
-                    <td>{{ destination.AirportCode }}</td>
+                    <td><button class="btn btn-primary btn-block" (click)="codeSelected(destination.AirportCode); isOn=true">{{ destination.AirportCode }}</button></td>
                     <td>{{ destination.City }}</td>
                     <td>{{ destination.Description }}</td>
                     <!-- <td>{{ destination.Rating }} -->
@@ -44,6 +46,15 @@
                             class="thumbnailImg">
                     </td>
                 </tr>
+                
+                    <tr>
+                        <td colspan="5">
+                            <app-travel-request *ngIf="isOn" (cancelFormEvent)="toggleRequestForm($event)" [toggleCardHeader]="false"></app-travel-request>
+                            <!-- <div *ngIf="isOn">On</div>
+                            <div *ngIf="!isOn">Off</div> -->
+                        </td>
+                    </tr>
+                
             </tbody>
         </table>
 

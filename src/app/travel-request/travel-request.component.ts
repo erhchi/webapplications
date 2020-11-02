@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IDestination } from '../models/destination';
 import { Itinerary } from '../models/itinerary';
 import { DestinationsService } from '../services/destinations.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-travel-request',
@@ -9,11 +10,12 @@ import { DestinationsService } from '../services/destinations.service';
   styleUrls: ['./travel-request.component.css']
 })
  export class TravelRequestComponent implements OnInit {
+  @Input() toggleCardHeader: boolean = true; 
+  @Output() cancelFormEvent = new EventEmitter<boolean>();
 
   componentTitle: string = 'Travel Request';
   min: number = 1;
   max: number = 10;
-
   destinations: IDestination[];
 
 
@@ -56,10 +58,10 @@ import { DestinationsService } from '../services/destinations.service';
     //form.reset();
   }
 
-  onCancel(form):void{
-    console.log('cancel')
-    //form.reset();
-    //this.router.navigate(['../'], { relativeTo: this.route});
+  onCancel(form: NgForm):void{
+
+    this.cancelFormEvent.emit(false);
+    
   }
 
   clear():void{
@@ -68,6 +70,10 @@ import { DestinationsService } from '../services/destinations.service';
     this.model.destination = '';
     this.model.numberOfTravelers = 0;
     this.model.departureDate = new Date();
+  }
+
+  destinationSelected(code: string):void{
+    console.log('selected passed: ' + code);
   }
 
 }
