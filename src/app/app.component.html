@@ -1,39 +1,33 @@
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- <div class="container min-vh-100 min-vw-100"> -->
+<div class="container h-100 w-100">
+  <div class="card h-100">
 
-<!-- <div class="mt-1; ml-3">
-  <h2>Welcome {{title}}</h2>
-  <p>Main OS: Widnows 10 WSL2 Ubuntu</p>
-  <p>Secondary OS: Windows 10</p>
-</div> -->
-
-<!-- <div class="jumbotron jumbotron-fluid">
-    <div class="container">
-      <h1 class="display-8">Fluid jumbotron</h1>
-      <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand navbar-dark bg-dark ">
+    <div class="navbar-header">
+      <a class="navbar-brand" [routerLink]="['home']">YouNoGo</a>    
     </div>
-  </div> -->
+    <div class="navbar-header">
+      <a class="navbar-brand" [routerLink]="['destinations']">Destinations</a>    
+    </div>
+    <div class="navbar-header">
+      <a class="navbar-brand" [routerLink]="['travel-request']">Travel Reqeust</a>    
+    </div>
+    <div class="navbar-header">
+      <a class="navbar-brand" [routerLink]="['about']">About</a>
+    </div>
+  </nav>
 
-  <!-- <hr/> -->
+  <!-- Main Content -->
+  <router-outlet></router-outlet>
 
-<div class="ml-0">
-  <app-travel-request></app-travel-request>
+  <!-- Footer Content -->
+  <div class="card-footer text-center">
+    <div class="companyLogo">YouNoGo Travel &reg;</div> 
+    <div class="courseMoniker">Eric Haerr <br/>
+    CSC 436 Web Applications</div>
+  </div>
+
+  </div>
 </div>
 
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
-
-
-<router-outlet></router-outlet>

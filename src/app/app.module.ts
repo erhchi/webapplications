@@ -8,6 +8,9 @@ import { TravelRequestComponent } from './travel-request/travel-request.componen
 import { NumberRangeDirective } from './directives/number-range.directive';
 import { RouteValidationDirective } from './directives/route-validation.directive';
 import { DateValidationDirective } from './directives/date-validation.directive';
+import { AboutComponent } from './about/about.component';
+import { HomeComponent } from './home/home.component';
+import { DestinationsComponent } from './destinations/destinations.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +18,10 @@ import { DateValidationDirective } from './directives/date-validation.directive'
     TravelRequestComponent,
     NumberRangeDirective,
     RouteValidationDirective,
-    DateValidationDirective
+    DateValidationDirective,
+    AboutComponent,
+    HomeComponent,
+    DestinationsComponent
   ],
   imports: [
     BrowserModule,

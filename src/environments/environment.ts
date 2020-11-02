@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  primaryOS: "Windows 10 WSL2 Ubuntu",
+  secondaryOS: "Windows 10",
+  ide: "Visual Studio Code - v.1.50.1"
 };
 
 /*

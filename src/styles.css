@@ -1,1 +1,51 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Structural styling */
+html,body { height:100%; }
+
+.card-footer{
+    position:absolute;
+      bottom:0;
+      width:100%;
+    }
+
+/* Image styling */
+.companyLogo{
+  font-family: URW Chancery L, cursive;
+}
+.courseMoniker{
+    font-size: small;
+}
+.thumbnailImg{
+    width: 15%;
+    height: 5%;
+}
+table{
+    table-layout: fixed;
+}
+.border {
+    border-width:3px !important;
+}
+.icon-padding{
+    padding-right: .5em;
+}
+  
+
+/* Archive styling */
+/* 
+Source: https://www.w3schools.com/howto/howto_css_center-vertical.asp
+
+.container-inside {
+    height: 200px;
+    position: relative;
+    border: 3px solid green;
+    }
+
+.vertical-center  {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+      } 
+*/

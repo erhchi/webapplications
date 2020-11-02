@@ -10,7 +10,7 @@ export class DateValidationDirective implements Validator {
 
   validate(formGroup: FormGroup): ValidationErrors{
 
-    console.log('testXX');
+    //console.log('testXX');
     
     const control = formGroup.controls[this.departureDateCheck[0]];
 
